@@ -5,9 +5,13 @@ import { User, Truck } from "lucide-react-native";
 
 interface RoleSelectorProps {
   onSelectRole?: (role: "customer" | "driver") => void;
+  selectedRole?: "customer" | "driver" | null;
 }
 
-const RoleSelector = ({ onSelectRole = () => {} }: RoleSelectorProps) => {
+const RoleSelector = ({
+  onSelectRole = () => {},
+  selectedRole = null,
+}: RoleSelectorProps) => {
   const router = useRouter();
 
   const handleRoleSelection = (role: "customer" | "driver") => {
@@ -30,7 +34,7 @@ const RoleSelector = ({ onSelectRole = () => {} }: RoleSelectorProps) => {
       <View className="flex-row justify-between space-x-4">
         {/* Customer Role Card */}
         <TouchableOpacity
-          className="flex-1 bg-blue-50 p-4 rounded-lg border border-blue-200 items-center"
+          className={`flex-1 p-4 rounded-lg border items-center ${selectedRole === "customer" ? "bg-blue-100 border-blue-400" : "bg-blue-50 border-blue-200"}`}
           onPress={() => handleRoleSelection("customer")}
           activeOpacity={0.7}
         >
@@ -45,7 +49,7 @@ const RoleSelector = ({ onSelectRole = () => {} }: RoleSelectorProps) => {
 
         {/* Driver Role Card */}
         <TouchableOpacity
-          className="flex-1 bg-green-50 p-4 rounded-lg border border-green-200 items-center"
+          className={`flex-1 p-4 rounded-lg border items-center ${selectedRole === "driver" ? "bg-green-100 border-green-400" : "bg-green-50 border-green-200"}`}
           onPress={() => handleRoleSelection("driver")}
           activeOpacity={0.7}
         >
